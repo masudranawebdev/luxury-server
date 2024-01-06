@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const SendForgetPasswordLink = async (email) => {
+const SendForgetPasswordLink = async (email, token) => {
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -11,7 +11,7 @@ const SendForgetPasswordLink = async (email) => {
                 pass: process.env.pass,
             },
         });
-        const resetLink = 'http://localhost:3000/reset-password'
+        const resetLink = `http://localhost:3000/reset-password/${token}`;
         // send mail with defined transport object
         let info = await transporter.sendMail({
             from: 'No reply <classicIt@gmail.com>', // sender address
